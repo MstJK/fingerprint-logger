@@ -15,7 +15,8 @@
         .then((response) => response.json())
         .then((data) => {
           let echolog = {
-            now: new Date(),
+            time: new Date(),
+             krtime= time.toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' });
             ipAddress: data.YourFuckingIPAddress,
             location: data.YourFuckingLocation,
             hostname: data.YourFuckingHostname,
